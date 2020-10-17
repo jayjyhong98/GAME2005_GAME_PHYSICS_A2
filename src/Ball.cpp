@@ -6,7 +6,7 @@ using namespace std;
 
 Ball::Ball()
 {
-	TextureManager::Instance()->load("../Assets/textures/circle.png", "circle");
+	TextureManager::Instance()->load("../Assets/textures/Box.png", "circle");
 	
 	auto size = TextureManager::Instance()->getTextureSize("circle");
 	setWidth(size.x);

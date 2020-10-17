@@ -120,7 +120,7 @@ void PlayScene::start()
 	// Labels
 	const SDL_Color yellow = { 255, 255, 153, 255 };
 
-	m_pScaleLabel = new Label("Scale = 1PPM         Assuming gravity is 9.8m/s^2", "Consolas", 15, yellow, glm::vec2(400.0f, 10.0f));
+	m_pScaleLabel = new Label("Scale = 100PPM         Assuming gravity is 9.8m/s^2", "Consolas", 15, yellow, glm::vec2(400.0f, 10.0f));
 	m_pScaleLabel->setParent(this);
 	addChild(m_pScaleLabel);
 
