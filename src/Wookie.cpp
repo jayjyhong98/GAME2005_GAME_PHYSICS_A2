@@ -8,7 +8,7 @@ Wookie::Wookie() {
 	setWidth(size.x);
 	setHeight(size.y);
 
-	getTransform()->position = glm::vec2(275.0f, 460.0f);
+	getTransform()->position = glm::vec2(25.0f, 460.0f);
 	getRigidBody()->velocity = glm::vec2(0.0f, 0.0f);
 	getRigidBody()->acceleration = glm::vec2(0.0f, 0.0f);
 	getRigidBody()->isColliding = false;

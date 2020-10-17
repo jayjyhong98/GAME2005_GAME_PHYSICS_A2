@@ -164,7 +164,6 @@ void PlayScene::GUI_Function() const
 	static int xPosition = 300;
 	if (ImGui::SliderInt("Position X", &xPosition, 0, 700))
 	{
-		m_pWookie->getTransform()->position.x = xPosition;
 	}
 	static int xRun = 400.0f;
 	if (ImGui::SliderInt("Run", &xRun, 0, 700))
@@ -177,13 +176,12 @@ void PlayScene::GUI_Function() const
 
 	if (ImGui::Button("Set"))
 	{
-
 		m_pRamp->setPositionX(xPosition);
 		m_pRamp->setRun(xRun);
 		m_pRamp->setRise(yRise);
 
-		m_pBall->getTransform()->position.x = xRun + m_pBall->getWidth() / 2;
-		m_pBall->getTransform()->position.y = xPosition;
+		m_pBall->getTransform()->position.x = m_pRamp->getPosition().x;
+		m_pBall->getTransform()->position.y = m_pRamp->getPosition().y - m_pRamp->getRise();
 	}
 	if (ImGui::Button("Throw to Trooper Based off Angle"))
 	{
