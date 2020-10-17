@@ -38,14 +38,14 @@ void PlayScene::update()
 
 	std::string labelText = "";
 
-	labelText = "Distance(m) = " + std::to_string(m_pBall->getDistance(m_pWookie));
-	m_pDistanceLabel->setText(labelText);
+	//labelText = "Distance(m) = " + std::to_string(m_pBall->getDistance(m_pWookie));
+	//m_pDistanceLabel->setText(labelText);
 
-	labelText = "Initial Velocity(m/s) = " + std::to_string(m_pBall->getInitialVel());
-	m_pInitVelLabel->setText(labelText);
+	//labelText = "Initial Velocity(m/s) = " + std::to_string(m_pBall->getInitialVel());
+	//m_pInitVelLabel->setText(labelText);
 
-	labelText = "Angle(deg) = " + std::to_string(m_pBall->getDegAngle());
-	m_pAngleLabel->setText(labelText);
+	//labelText = "Angle(deg) = " + std::to_string(m_pBall->getDegAngle());
+	//m_pAngleLabel->setText(labelText);
 }
 
 void PlayScene::clean()
@@ -124,17 +124,19 @@ void PlayScene::start()
 	m_pScaleLabel->setParent(this);
 	addChild(m_pScaleLabel);
 
-	m_pDistanceLabel = new Label("Distance", "Consolas", 25, yellow, glm::vec2(400.0f, 40.0f));
-	m_pDistanceLabel->setParent(this);
-	addChild(m_pDistanceLabel);
+	// TO DO LABELS!!!
 
-	m_pInitVelLabel = new Label("Initial Velocity", "Consolas", 25, yellow, glm::vec2(400.0f, 70.0f));
-	m_pInitVelLabel->setParent(this);
-	addChild(m_pInitVelLabel);
+	//m_pDistanceLabel = new Label("Distance", "Consolas", 25, yellow, glm::vec2(400.0f, 40.0f));
+	//m_pDistanceLabel->setParent(this);
+	//addChild(m_pDistanceLabel);
 
-	m_pAngleLabel = new Label("Angle", "Consolas", 25, yellow, glm::vec2(400.0f, 100.0f));
-	m_pAngleLabel->setParent(this);
-	addChild(m_pAngleLabel);
+	//m_pInitVelLabel = new Label("Initial Velocity", "Consolas", 25, yellow, glm::vec2(400.0f, 70.0f));
+	//m_pInitVelLabel->setParent(this);
+	//addChild(m_pInitVelLabel);
+
+	//m_pAngleLabel = new Label("Angle", "Consolas", 25, yellow, glm::vec2(400.0f, 100.0f));
+	//m_pAngleLabel->setParent(this);
+	//addChild(m_pAngleLabel);
 }
 
 void PlayScene::GUI_Function() const
@@ -144,24 +146,24 @@ void PlayScene::GUI_Function() const
 
 	ImGui::Begin("Scenerio Adjuster", NULL, ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_MenuBar);
 
-	if (ImGui::Button("Set to Original Problem <Question 1.a>"))
-	{
-		m_pBall->setState(0);
-		m_pWookie->getTransform()->position.x = 275;
-		m_pBall->getTransform()->position.x = m_pWookie->getTransform()->position.x;
-		m_pBall->getTransform()->position.y = m_pWookie->getTransform()->position.y;
-	}
+	//if (ImGui::Button("Set to Original Problem <Question 1.a>"))
+	//{
+	//	m_pBall->setState(0);
+	//	m_pWookie->getTransform()->position.x = 275;
+	//	m_pBall->getTransform()->position.x = m_pWookie->getTransform()->position.x;
+	//	m_pBall->getTransform()->position.y = m_pWookie->getTransform()->position.y;
+	//}
 
-	if (ImGui::Button("Set to Furthest Distance <Question 1.b>"))
-	{
-		m_pBall->setState(1);
-		m_pBall->getTransform()->position.x = m_pWookie->getTransform()->position.x;
-		m_pBall->getTransform()->position.y = m_pWookie->getTransform()->position.y;
-	}
+	//if (ImGui::Button("Set to Furthest Distance <Question 1.b>"))
+	//{
+	//	m_pBall->setState(1);
+	//	m_pBall->getTransform()->position.x = m_pWookie->getTransform()->position.x;
+	//	m_pBall->getTransform()->position.y = m_pWookie->getTransform()->position.y;
+	//}
 
 	ImGui::Separator();
 
-	static int xPosition = 300;
+	static int xPosition = 150;
 	if (ImGui::SliderInt("Position X", &xPosition, 0, 700))
 	{
 	}
@@ -183,14 +185,14 @@ void PlayScene::GUI_Function() const
 		m_pBall->getTransform()->position.x = m_pRamp->getPosition().x;
 		m_pBall->getTransform()->position.y = m_pRamp->getPosition().y - m_pRamp->getRise();
 	}
-	if (ImGui::Button("Throw to Trooper Based off Angle"))
-	{
-		m_pBall->setf_angle(yRise);
-		m_pBall->setf_meter(m_pTrooper->getTransform()->position.x - m_pWookie->getTransform()->position.x);
-		m_pBall->setState(3);
-		m_pBall->getTransform()->position.x = m_pWookie->getTransform()->position.x;
-		m_pBall->getTransform()->position.y = m_pWookie->getTransform()->position.y;
-	}
+	//if (ImGui::Button("Throw to Trooper Based off Angle"))
+	//{
+	//	m_pBall->setf_angle(yRise);
+	//	m_pBall->setf_meter(m_pTrooper->getTransform()->position.x - m_pWookie->getTransform()->position.x);
+	//	m_pBall->setState(3);
+	//	m_pBall->getTransform()->position.x = m_pWookie->getTransform()->position.x;
+	//	m_pBall->getTransform()->position.y = m_pWookie->getTransform()->position.y;
+	//}
 
 	ImGui::End();
 
