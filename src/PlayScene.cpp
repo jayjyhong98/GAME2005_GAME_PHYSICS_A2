@@ -7,6 +7,8 @@
 #include "imgui_sdl.h"
 #include "Renderer.h"
 
+#define FLOOR 470
+
 PlayScene::PlayScene()
 {
 	PlayScene::start();
@@ -18,7 +20,14 @@ PlayScene::~PlayScene()
 void PlayScene::draw()
 {
 	TextureManager::Instance()->draw("background", 0, 0, 0, 255, false);
+
 	GUI_Function();
+
+	// Drawing the ramp
+	Util::DrawLine({ m_pRamp->getPosition() }, { m_pRamp->getEndPoint(), FLOOR }, {1,0,0,0}); // bottom
+	Util::DrawLine({ m_pRamp->getPosition().x, FLOOR - m_pRamp->getRise() }, { m_pRamp->getEndPoint(), FLOOR }, {1,0,0,0}); // ramp
+	Util::DrawLine({ m_pRamp->getPosition().x, FLOOR - m_pRamp->getRise() }, { m_pRamp->getPosition() }, {1,0,0,0}); // side
+
 	drawDisplayList();
 	SDL_SetRenderDrawColor(Renderer::Instance()->getRenderer(), 255, 255, 255, 255);
 }
@@ -93,6 +102,9 @@ void PlayScene::start()
 	// Set GUI Title
 	m_guiTitle = "Play Scene";
 
+	// Ramp Object
+	m_pRamp = new Ramp();
+
 	// Trooper Sprite
 	m_pTrooper = new Trooper();
 	addChild(m_pTrooper);
@@ -149,31 +161,33 @@ void PlayScene::GUI_Function() const
 
 	ImGui::Separator();
 
-	static int xWookiePos = 275;
-	if (ImGui::SliderInt("Wookie's Position X", &xWookiePos, 0, 700))
+	static int xPosition = 300;
+	if (ImGui::SliderInt("Position X", &xPosition, 0, 700))
 	{
-		m_pWookie->getTransform()->position.x = xWookiePos;
+		m_pWookie->getTransform()->position.x = xPosition;
 	}
-	static int newVelocity = 95.0f;
-	if (ImGui::SliderInt("Initial Velocity", &newVelocity, 0, 300))
+	static int xRun = 400.0f;
+	if (ImGui::SliderInt("Run", &xRun, 0, 700))
 	{
 	}
-	static int throwAngle = 45.0f;
-	if (ImGui::SliderInt("Angle", &throwAngle, 0, 90))
+	static int yRise = 300.0f;
+	if (ImGui::SliderInt("Rise", &yRise, 0, 500))
 	{
 	}
 
-	if (ImGui::Button("Throw Based off Input From Sliders"))
+	if (ImGui::Button("Set"))
 	{
-		m_pBall->setf_initalVel(newVelocity);
-		m_pBall->setf_angle(throwAngle);
-		m_pBall->setState(2);
-		m_pBall->getTransform()->position.x = m_pWookie->getTransform()->position.x;
-		m_pBall->getTransform()->position.y = m_pWookie->getTransform()->position.y;
+
+		m_pRamp->setPositionX(xPosition);
+		m_pRamp->setRun(xRun);
+		m_pRamp->setRise(yRise);
+
+		m_pBall->getTransform()->position.x = xRun + m_pBall->getWidth() / 2;
+		m_pBall->getTransform()->position.y = xPosition;
 	}
 	if (ImGui::Button("Throw to Trooper Based off Angle"))
 	{
-		m_pBall->setf_angle(throwAngle);
+		m_pBall->setf_angle(yRise);
 		m_pBall->setf_meter(m_pTrooper->getTransform()->position.x - m_pWookie->getTransform()->position.x);
 		m_pBall->setState(3);
 		m_pBall->getTransform()->position.x = m_pWookie->getTransform()->position.x;

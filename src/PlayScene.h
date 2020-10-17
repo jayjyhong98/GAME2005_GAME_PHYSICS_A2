@@ -7,6 +7,7 @@
 #include "Ball.h"
 #include "Button.h"
 #include "Wookie.h"
+#include "Ramp.h"
 
 #include "imgui.h"
 #include "imgui_sdl.h"
@@ -31,6 +32,7 @@ private:
 
 	glm::vec2 m_mousePosition;
 
+	Ramp* m_pRamp;
 	Ball* m_pBall;
 	Wookie* m_pWookie;
 	Trooper* m_pTrooper;
