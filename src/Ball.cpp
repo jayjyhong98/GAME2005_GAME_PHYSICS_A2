@@ -113,6 +113,7 @@ void Ball::setState(int x) // Here we can change current input data when new sim
 		accX = weight * GRAVITY * cos(f_angle);
 		getRigidBody()->acceleration = { accY , accX };
 		getRigidBody()->velocity = { 0.0, 0.0 };
+		netForce = accY + accX;
 	}
 	else if (state == 1) // stop
 	{

@@ -38,7 +38,7 @@ private:
 	Label* m_pScaleLabel;
 	Label* m_pRampLabel;
 	Label* m_pAccelLabel;
-	Label* m_pInitVelLabel;
+	Label* m_pNetForceLabel;
 
 	Button* m_pBackButton;
 	Button* m_pNextButton;

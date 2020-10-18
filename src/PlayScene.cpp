@@ -38,13 +38,13 @@ void PlayScene::update()
 
 	std::string labelText = "";
 
-	labelText = "Ramp: Rise(p) = " + std::to_string(m_pRamp->getRise()) + ",  Run(p) = " + std::to_string(m_pRamp->getRun());
+	labelText = "RAMP: Rise(p) = " + std::to_string(m_pRamp->getRise()) + ",  Run(p) = " + std::to_string(m_pRamp->getRun());
 	m_pRampLabel->setText(labelText);
 
-	labelText = "Initial Velocity(m/s) = " + std::to_string(m_pBall->getInitialVel());
-	m_pInitVelLabel->setText(labelText);
+	labelText = "BOX: Net Force(J???) = " + std::to_string(m_pBall->getNetForce());
+	m_pNetForceLabel->setText(labelText);
 
-	labelText = "Acceleration(m/s^2) = " + std::to_string(m_pBall->getAccelTotal());
+	labelText = "BOX: Acceleration(p/s^2 eh??) = " + std::to_string(m_pBall->getAccelTotal());
 	m_pAccelLabel->setText(labelText);
 }
 
@@ -118,23 +118,23 @@ void PlayScene::start()
 	addChild(m_pWookie);
 
 	// Labels
-	const SDL_Color yellow = { 255, 255, 153, 255 };
+	const SDL_Color red = { 255, 0, 0, 255 };
 
-	m_pScaleLabel = new Label("Scale = 100PPM         Assuming gravity is 9.8m/s^2", "Consolas", 15, yellow, glm::vec2(400.0f, 10.0f));
+	m_pScaleLabel = new Label("Scale = 100PPM         Assuming gravity is 9.8m/s^2", "Consolas", 15, red, glm::vec2(400.0f, 10.0f));
 	m_pScaleLabel->setParent(this);
 	addChild(m_pScaleLabel);
 
 	// TO DO LABELS!!!
 
-	m_pRampLabel = new Label("Ramp", "Consolas", 20, yellow, glm::vec2(400.0f, 40.0f));
+	m_pRampLabel = new Label("Ramp", "Consolas", 20, red, glm::vec2(400.0f, 40.0f));
 	m_pRampLabel->setParent(this);
 	addChild(m_pRampLabel);
 
-	m_pInitVelLabel = new Label("Initial Velocity", "Consolas", 20, yellow, glm::vec2(400.0f, 70.0f));
-	m_pInitVelLabel->setParent(this);
-	addChild(m_pInitVelLabel);
+	m_pNetForceLabel = new Label("Initial Velocity", "Consolas", 20, red, glm::vec2(400.0f, 70.0f));
+	m_pNetForceLabel->setParent(this);
+	addChild(m_pNetForceLabel);
 
-	m_pAccelLabel = new Label("Acceleration", "Consolas", 20, yellow, glm::vec2(400.0f, 100.0f));
+	m_pAccelLabel = new Label("Acceleration", "Consolas", 20, red, glm::vec2(400.0f, 100.0f));
 	m_pAccelLabel->setParent(this);
 	addChild(m_pAccelLabel);
 }

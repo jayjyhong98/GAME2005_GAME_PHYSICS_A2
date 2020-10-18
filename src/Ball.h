@@ -35,7 +35,9 @@ public:
 	inline void setf_initalVel(float v) { f_initialVel = v; }// v = input from users
 
 	inline void setFriction(float f) { friction = f; }// coefficient of friction
-	inline float getAccelTotal() { return accelTotal; }// coefficient of friction
+
+	inline float getAccelTotal() { return accelTotal; }// total accel
+	inline float getNetForce() { return netForce; }// net force
 
 	inline float getInitialVel() { return initialVel; } // for label
 
@@ -72,7 +74,7 @@ private:
 	float f_maxdistance;
 	float f_friction;
 
-	float weight, accelTotal, friction;
+	float weight, accelTotal, netForce, friction;
 
 	bool b_simulationStop = false;
 };
