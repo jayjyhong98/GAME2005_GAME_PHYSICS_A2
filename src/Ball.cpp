@@ -106,12 +106,13 @@ void Ball::setState(int x) // Here we can change current input data when new sim
 	state = x;
 	if (state == 0) // in action
 	{
+		accelTotal = GRAVITY * sin(f_angle) - friction * GRAVITY * cos(f_angle);
+
 		float accX, accY;
 		accY = weight * GRAVITY * sin(f_angle);
 		accX = weight * GRAVITY * cos(f_angle);
 		getRigidBody()->acceleration = { accY , accX };
 		getRigidBody()->velocity = { 0.0, 0.0 };
-		accelTotal = GRAVITY * sin(f_angle) - friction * GRAVITY * cos(f_angle); // ADD MU
 	}
 	else if (state == 1) // stop
 	{
