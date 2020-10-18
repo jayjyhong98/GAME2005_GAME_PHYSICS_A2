@@ -22,6 +22,7 @@ public:
 	void moveDown();
 	void stopMoving();
 	void projectileMotion();
+	void rampMotion();
 	void setState(int x);
 
 	bool isGravityEnabled = false;
@@ -39,6 +40,9 @@ public:
 	inline void setf_angle(float a) { f_angle = a; }// a = input from users
 
 	inline float getDegAngle() { return degAngle; }
+
+	inline void setWeight(float w) { weight = w; }
+	inline float getWeight() { return weight; }
 
 	glm::vec2 throwSpeed;
 
@@ -63,6 +67,8 @@ private:
 	float f_angle = 45.0f, f_result; // to calculate in case of input variables from users
 	float f_meter = 485.0f, f_initialVel = 95.0f; // to change total meters and initial velocity(speed)
 	float f_maxdistance;
+
+	float weight;
 
 	bool b_simulationStop = false;
 };

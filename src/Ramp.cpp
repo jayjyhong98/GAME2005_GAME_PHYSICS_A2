@@ -8,16 +8,14 @@ Ramp::Ramp()
 	run = 400;
 	rise = 300;
 	refresh();
-	std::cout << angle * Util::Rad2Deg;
+	std::cout << angle;
 }
 
-Ramp::~Ramp()
-{
-}
+Ramp::~Ramp() {}
 
 void Ramp::refresh()
 {
 	hyp = sqrt(rise * rise + run * run);
 	endPoint = position.x + run;
-	angle = atan(rise / run);
+	angle = atan(rise / run) * Util::Rad2Deg;
 }

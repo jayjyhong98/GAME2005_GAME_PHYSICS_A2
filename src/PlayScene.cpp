@@ -126,15 +126,15 @@ void PlayScene::start()
 
 	// TO DO LABELS!!!
 
-	//m_pDistanceLabel = new Label("Distance", "Consolas", 25, yellow, glm::vec2(400.0f, 40.0f));
+	//m_pDistanceLabel = new Label("Distance", "Consolas", 15, yellow, glm::vec2(400.0f, 40.0f));
 	//m_pDistanceLabel->setParent(this);
 	//addChild(m_pDistanceLabel);
 
-	//m_pInitVelLabel = new Label("Initial Velocity", "Consolas", 25, yellow, glm::vec2(400.0f, 70.0f));
+	//m_pInitVelLabel = new Label("Initial Velocity", "Consolas", 15, yellow, glm::vec2(400.0f, 70.0f));
 	//m_pInitVelLabel->setParent(this);
 	//addChild(m_pInitVelLabel);
 
-	//m_pAngleLabel = new Label("Angle", "Consolas", 25, yellow, glm::vec2(400.0f, 100.0f));
+	//m_pAngleLabel = new Label("Angle", "Consolas", 15, yellow, glm::vec2(400.0f, 100.0f));
 	//m_pAngleLabel->setParent(this);
 	//addChild(m_pAngleLabel);
 }
@@ -175,13 +175,23 @@ void PlayScene::GUI_Function() const
 	if (ImGui::SliderInt("Rise", &yRise, 0, 500))
 	{
 	}
+	static float weight = 12.8f;
+	if (ImGui::SliderFloat("Box Weight", &weight, 1.0f, 50.0f))
+	{
+	}
+	static float friction = 0.0f;
+	if (ImGui::SliderFloat("Coefficient of Friction", &friction, 0.0f, 1.0f))
+	{
+	}
 
 	if (ImGui::Button("Set"))
 	{
 		m_pRamp->setPositionX(xPosition);
 		m_pRamp->setRun(xRun);
 		m_pRamp->setRise(yRise);
+		m_pRamp->refresh();
 
+		m_pBall->setWeight(weight);
 		m_pBall->getTransform()->position.x = m_pRamp->getPosition().x;
 		m_pBall->getTransform()->position.y = m_pRamp->getPosition().y - m_pRamp->getRise();
 	}

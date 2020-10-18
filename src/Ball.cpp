@@ -84,6 +84,11 @@ void Ball::projectileMotion()
 	}
 }
 
+void Ball::rampMotion()
+{
+	//getRigidBody()->acceleration = GRAVITY * sin();
+}
+
 void Ball::setState(int x) // Here we can change current input data when new simulation is started
 {
 	state = x;
@@ -122,27 +127,6 @@ void Ball::setState(int x) // Here we can change current input data when new sim
 
 	b_simulationStop = false;
 }
-
-//	 Processes to answer questions------------------------------------------------START
-//
-//	 A. To calculate angle - basic (485m and 95m/s)
-//	 angle = ((485.0f * GRAVITY) / pow(95.0f, 2.0f));
-//	 result = 0.5 * asin(angle);
-//
-//	 if change some variables
-// 	 f_angle = ((f_meter * GRAVITY) / pow(f_initalVel, 2.0f));
-//	 f_result = 0.5 * asin(f_angle);
-//
-//
-//	 B. To calculate maximum distance
-//	 *Maximum distance can be obtained by throwing at an angle of 45 degrees <<<<<<<<<<<<
-//	 maxdistance = ( pow(95.0f, 2.0f) * maxangle / GRAVITY);
-//
-//	 if change some variables
-//
-//	 f_maxdistance = (pow(f_initalVel, 2.0f) * maxangle / GRAVITY);
-//
-//	 Processes to answer questions------------------------------------------------END
 
 bool Ball::isColliding(GameObject* pOther) {
 	// Works for square sprites only
