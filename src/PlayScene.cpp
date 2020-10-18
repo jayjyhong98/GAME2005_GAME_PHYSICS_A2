@@ -38,14 +38,14 @@ void PlayScene::update()
 
 	std::string labelText = "";
 
-	//labelText = "Distance(m) = " + std::to_string(m_pBall->getDistance(m_pWookie));
-	//m_pDistanceLabel->setText(labelText);
+	labelText = "Ramp: Rise(p) = " + std::to_string(m_pRamp->getRise()) + ",  Run(p) = " + std::to_string(m_pRamp->getRun());
+	m_pRampLabel->setText(labelText);
 
-	//labelText = "Initial Velocity(m/s) = " + std::to_string(m_pBall->getInitialVel());
-	//m_pInitVelLabel->setText(labelText);
+	labelText = "Initial Velocity(m/s) = " + std::to_string(m_pBall->getInitialVel());
+	m_pInitVelLabel->setText(labelText);
 
-	//labelText = "Angle(deg) = " + std::to_string(m_pBall->getDegAngle());
-	//m_pAngleLabel->setText(labelText);
+	labelText = "Acceleration(m/s^2) = " + std::to_string(m_pBall->getAccelTotal());
+	m_pAccelLabel->setText(labelText);
 }
 
 void PlayScene::clean()
@@ -126,17 +126,17 @@ void PlayScene::start()
 
 	// TO DO LABELS!!!
 
-	//m_pDistanceLabel = new Label("Distance", "Consolas", 15, yellow, glm::vec2(400.0f, 40.0f));
-	//m_pDistanceLabel->setParent(this);
-	//addChild(m_pDistanceLabel);
+	m_pRampLabel = new Label("Ramp", "Consolas", 20, yellow, glm::vec2(400.0f, 40.0f));
+	m_pRampLabel->setParent(this);
+	addChild(m_pRampLabel);
 
-	//m_pInitVelLabel = new Label("Initial Velocity", "Consolas", 15, yellow, glm::vec2(400.0f, 70.0f));
-	//m_pInitVelLabel->setParent(this);
-	//addChild(m_pInitVelLabel);
+	m_pInitVelLabel = new Label("Initial Velocity", "Consolas", 20, yellow, glm::vec2(400.0f, 70.0f));
+	m_pInitVelLabel->setParent(this);
+	addChild(m_pInitVelLabel);
 
-	//m_pAngleLabel = new Label("Angle", "Consolas", 15, yellow, glm::vec2(400.0f, 100.0f));
-	//m_pAngleLabel->setParent(this);
-	//addChild(m_pAngleLabel);
+	m_pAccelLabel = new Label("Acceleration", "Consolas", 20, yellow, glm::vec2(400.0f, 100.0f));
+	m_pAccelLabel->setParent(this);
+	addChild(m_pAccelLabel);
 }
 
 void PlayScene::GUI_Function() const
@@ -193,8 +193,10 @@ void PlayScene::GUI_Function() const
 
 		m_pBall->setWeight(weight);
 		m_pBall->setf_angle(m_pRamp->getAngle());
+		m_pBall->setFriction(friction);
 		m_pBall->getTransform()->position.x = m_pRamp->getPosition().x;
 		m_pBall->getTransform()->position.y = m_pRamp->getPosition().y - m_pRamp->getRise();
+
 		m_pBall->setState(0);
 	}
 	//if (ImGui::Button("Throw to Trooper Based off Angle"))

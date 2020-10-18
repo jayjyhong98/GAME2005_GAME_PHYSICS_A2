@@ -86,8 +86,8 @@ void Ball::projectileMotion()
 
 void Ball::rampMotion()
 {
-	getRigidBody()->velocity.y += getRigidBody()->acceleration.y * GRAVITY * deltaTime;
-	getRigidBody()->velocity.x += getRigidBody()->acceleration.x * GRAVITY * deltaTime;
+	getRigidBody()->velocity.y += getRigidBody()->acceleration.y * deltaTime;
+	getRigidBody()->velocity.x += getRigidBody()->acceleration.x * deltaTime;
 
 	glm::vec2 pos = getTransform()->position;
 	pos.x += getRigidBody()->velocity.x * deltaTime;
@@ -107,10 +107,11 @@ void Ball::setState(int x) // Here we can change current input data when new sim
 	if (state == 0) // in action
 	{
 		float accX, accY;
-		accY = weight * sin(f_angle);
-		accX = weight * cos(f_angle);
+		accY = weight * GRAVITY * sin(f_angle);
+		accX = weight * GRAVITY * cos(f_angle);
 		getRigidBody()->acceleration = { accY , accX };
 		getRigidBody()->velocity = { 0.0, 0.0 };
+		accelTotal = GRAVITY * sin(f_angle) - friction * GRAVITY * cos(f_angle); // ADD MU
 	}
 	else if (state == 1) // stop
 	{

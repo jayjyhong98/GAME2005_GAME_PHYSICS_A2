@@ -36,9 +36,9 @@ private:
 	Wookie* m_pWookie;
 	Trooper* m_pTrooper;
 	Label* m_pScaleLabel;
-	Label* m_pDistanceLabel;
-	Label* m_pAngleLabel;  // New label!
-	Label* m_pInitVelLabel;  // New label!
+	Label* m_pRampLabel;
+	Label* m_pAccelLabel;
+	Label* m_pInitVelLabel;
 
 	Button* m_pBackButton;
 	Button* m_pNextButton;

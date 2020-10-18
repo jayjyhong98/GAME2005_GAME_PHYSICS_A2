@@ -34,6 +34,9 @@ public:
 
 	inline void setf_initalVel(float v) { f_initialVel = v; }// v = input from users
 
+	inline void setFriction(float f) { friction = f; }// coefficient of friction
+	inline float getAccelTotal() { return accelTotal; }// coefficient of friction
+
 	inline float getInitialVel() { return initialVel; } // for label
 
 	inline float getf_angle() { return f_angle; } // remove ; when if defined .h
@@ -67,8 +70,9 @@ private:
 	float f_angle = 45.0f, f_result; // to calculate in case of input variables from users
 	float f_meter = 485.0f, f_initialVel = 95.0f; // to change total meters and initial velocity(speed)
 	float f_maxdistance;
+	float f_friction;
 
-	float weight;
+	float weight, accelTotal, friction;
 
 	bool b_simulationStop = false;
 };
