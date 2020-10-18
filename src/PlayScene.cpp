@@ -192,8 +192,10 @@ void PlayScene::GUI_Function() const
 		m_pRamp->refresh();
 
 		m_pBall->setWeight(weight);
+		m_pBall->setf_angle(m_pRamp->getAngle());
 		m_pBall->getTransform()->position.x = m_pRamp->getPosition().x;
 		m_pBall->getTransform()->position.y = m_pRamp->getPosition().y - m_pRamp->getRise();
+		m_pBall->setState(0);
 	}
 	//if (ImGui::Button("Throw to Trooper Based off Angle"))
 	//{

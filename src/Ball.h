@@ -47,7 +47,7 @@ public:
 	glm::vec2 throwSpeed;
 
 private:
-	const float deltaTime = 3.0f / 60.f;
+	const float deltaTime = 1.0f / 60.f;
 
 	int state = 0;
 	

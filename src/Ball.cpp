@@ -36,7 +36,7 @@ void Ball::draw()
 
 void Ball::update()
 {
-	projectileMotion();
+	rampMotion();
 }
 
 void Ball::clean()
@@ -86,39 +86,36 @@ void Ball::projectileMotion()
 
 void Ball::rampMotion()
 {
-	//getRigidBody()->acceleration = GRAVITY * sin();
+	getRigidBody()->velocity.y += getRigidBody()->acceleration.y * GRAVITY * deltaTime;
+	getRigidBody()->velocity.x += getRigidBody()->acceleration.x * GRAVITY * deltaTime;
+
+	glm::vec2 pos = getTransform()->position;
+	pos.x += getRigidBody()->velocity.x * deltaTime;
+	pos.y += getRigidBody()->velocity.y * deltaTime;
+	getTransform()->position = pos;
+
+	if (pos.y >= 470) // stop when reached ground level
+	{
+		getTransform()->position.y = 470.0f;
+		setState(1);
+	}
 }
 
 void Ball::setState(int x) // Here we can change current input data when new simulation is started
 {
 	state = x;
-	if (state == 0) // original problem (question 1a) -> angle unknown
+	if (state == 0) // in action
 	{
-		currAngle = Util::projectileAngle(485.0f, 95.0f, GRAVITY);
-		degAngle = currAngle * Util::Rad2Deg;
-
-		initialVel = 95.0f;
+		float accX, accY;
+		accY = weight * sin(f_angle);
+		accX = weight * cos(f_angle);
+		getRigidBody()->acceleration = { accY , accX };
+		getRigidBody()->velocity = { 0.0, 0.0 };
 	}
-	else if (state == 1) // second problem (question 1b) -> distance unknown
+	else if (state == 1) // stop
 	{
-		currAngle = 45.0f * Util::Deg2Rad;
-		degAngle = 45.0; // optimal angle for max distance is 45 degrees
-
-		initialVel = 95.0f;
-	}
-	else if (state == 2)// user input
-	{
-		currAngle = f_angle * Util::Deg2Rad;
-		degAngle = f_angle; // in degrees, user input
-
-		initialVel = f_initialVel; // set current vel to adjusted vel
-	}
-	else // stormtrooper lock on ->initial velocity unknown
-	{
-		currAngle = f_angle * Util::Deg2Rad;
-		degAngle = f_angle;
-
-		initialVel = sqrt(f_meter * GRAVITY / sin(2 * currAngle));
+		getRigidBody()->acceleration = { 0.0, 0.0 };
+		getRigidBody()->velocity = { 0.0, 0.0 };
 	}
 
 	getRigidBody()->velocity.x = initialVel * cos(currAngle); // x component of initial power, without wind resistance 'law of inertia' says it won't change :D
