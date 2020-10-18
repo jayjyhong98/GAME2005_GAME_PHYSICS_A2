@@ -65,26 +65,6 @@ void Ball::stopMoving() {
 	m_direction = glm::vec2(0.0f, 0.0f);
 }
 
-void Ball::projectileMotion()
-{
-	//GravityTime += deltaTime;
-	if (!b_simulationStop)
-	{
-		getRigidBody()->velocity.y += GRAVITY * deltaTime;
-
-		glm::vec2 pos = getTransform()->position;
-		pos.x += getRigidBody()->velocity.x * deltaTime;
-		pos.y += getRigidBody()->velocity.y * deltaTime;
-		getTransform()->position = pos;
-
-		if (pos.y >= 460)
-		{
-			getTransform()->position.y = 460.0f;
-			b_simulationStop = true;
-		}
-	}
-}
-
 void Ball::rampMotion()
 {
 	getRigidBody()->velocity.y += getRigidBody()->acceleration.y;
@@ -107,7 +87,7 @@ void Ball::rampMotion()
 	}
 }
 
-void Ball::setState(int x) // Here we can change current input data when new simulation is started
+void Ball::setState(int x)
 {
 	state = x;
 	if (state == 0) // in action
