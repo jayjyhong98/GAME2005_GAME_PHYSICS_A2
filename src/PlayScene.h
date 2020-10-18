@@ -39,12 +39,8 @@ private:
 	Label* m_pRampLabel;
 	Label* m_pAccelLabel;
 	Label* m_pNetForceLabel;
-<<<<<<< Updated upstream
-=======
 	Label* m_pDistanceLabel;
 	Label* m_pVelocityLabel;
-	Label* m_pMassLabel;
->>>>>>> Stashed changes
 
 	Button* m_pBackButton;
 	Button* m_pNextButton;

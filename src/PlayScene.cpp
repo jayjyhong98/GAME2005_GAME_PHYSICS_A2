@@ -38,26 +38,20 @@ void PlayScene::update()
 
 	std::string labelText = "";
 
-	labelText = "RAMP: Rise(m) = " + std::to_string(m_pRamp->getRise() / 100.0f) + ",  Run(m) = " + std::to_string(m_pRamp->getRun() / 100.0f);
+	labelText = "RAMP: Rise(p) = " + std::to_string(m_pRamp->getRise()) + ",  Run(p) = " + std::to_string(m_pRamp->getRun());
 	m_pRampLabel->setText(labelText);
 
-	labelText = "BOX: Net Force(J) = " + std::to_string(m_pBall->getNetForce());
+	labelText = "BOX: Net Force(J???) = " + std::to_string(m_pBall->getNetForce());
 	m_pNetForceLabel->setText(labelText);
 
-	labelText = "Acceleration(m/s^2) = " + std::to_string(m_pBall->getAccelTotal());
+	labelText = "BOX: Acceleration(p/s^2 eh??) = " + std::to_string(m_pBall->getAccelTotal());
 	m_pAccelLabel->setText(labelText);
-<<<<<<< Updated upstream
-=======
 
-	labelText = "Distance(m)= " + std::to_string((m_pBall->getTransform()->position.x - m_pRamp->getPosition().x) / 100.0f);
+	labelText = "Distance = " + std::to_string(m_pBall->getTransform()->position.x);
 	m_pDistanceLabel->setText(labelText);
 
-	labelText = "Velocity.x(m/s) = " + std::to_string(m_pBall->getRigidBody()->velocity.x);
+	labelText = "Velocity.x = " + std::to_string(m_pBall->getRigidBody()->velocity.x);
 	m_pVelocityLabel->setText(labelText);
-
-	labelText = "Mass(kg) = " + std::to_string(m_pBall->getMass());
-	m_pMassLabel->setText(labelText);
->>>>>>> Stashed changes
 }
 
 void PlayScene::clean()
@@ -132,38 +126,31 @@ void PlayScene::start()
 	// Labels
 	const SDL_Color red = { 255, 0, 0, 255 };
 
-	m_pScaleLabel = new Label("Scale = 100PPM         Assuming gravity is 9.8m/s^2", "Consolas", 15, red, glm::vec2(250.0f, 10.0f));
+	m_pScaleLabel = new Label("Scale = 100PPM         Assuming gravity is 9.8m/s^2", "Consolas", 15, red, glm::vec2(400.0f, 10.0f));
 	m_pScaleLabel->setParent(this);
 	addChild(m_pScaleLabel);
 
 	// TO DO LABELS!!!
 
-	m_pRampLabel = new Label("Ramp", "Consolas", 20, red, glm::vec2(250.0f, 40.0f));
+	m_pRampLabel = new Label("Ramp", "Consolas", 20, red, glm::vec2(400.0f, 40.0f));
 	m_pRampLabel->setParent(this);
 	addChild(m_pRampLabel);
 
-	m_pNetForceLabel = new Label("Initial Velocity", "Consolas", 20, red, glm::vec2(250.0f, 70.0f));
+	m_pNetForceLabel = new Label("Initial Velocity", "Consolas", 20, red, glm::vec2(400.0f, 70.0f));
 	m_pNetForceLabel->setParent(this);
 	addChild(m_pNetForceLabel);
 
-	m_pAccelLabel = new Label("Acceleration", "Consolas", 20, red, glm::vec2(250.0f, 100.0f));
+	m_pAccelLabel = new Label("Acceleration", "Consolas", 20, red, glm::vec2(400.0f, 100.0f));
 	m_pAccelLabel->setParent(this);
 	addChild(m_pAccelLabel);
-<<<<<<< Updated upstream
-=======
 
-	m_pVelocityLabel = new Label("Velocity", "Consolas", 20, red, glm::vec2(250.0f, 130.0f));
+	m_pVelocityLabel = new Label("Velocity", "Consolas", 20, red, glm::vec2(300.0f, 130.0f));
 	m_pVelocityLabel->setParent(this);
 	addChild(m_pVelocityLabel);
 
-	m_pDistanceLabel = new Label("Distance", "Consolas", 20, red, glm::vec2(250.0f, 160.0f));
+	m_pDistanceLabel = new Label("Distance", "Consolas", 20, red, glm::vec2(300.0f, 160.0f));
 	m_pDistanceLabel->setParent(this);
 	addChild(m_pDistanceLabel);
-
-	m_pMassLabel = new Label("Mass", "Consolas", 20, red, glm::vec2(250.0f, 190.0f));
-	m_pMassLabel->setParent(this);
-	addChild(m_pMassLabel);
->>>>>>> Stashed changes
 }
 
 void PlayScene::GUI_Function() const
@@ -190,28 +177,23 @@ void PlayScene::GUI_Function() const
 
 	ImGui::Separator();
 
-	static int xPosition = 150;
+	static int xPosition = 10;
 	if (ImGui::SliderInt("Position X", &xPosition, 0, 700))
 	{
 	}
 	static int xRun = 400.0f;
-	if (ImGui::SliderInt("Run (cm)", &xRun, 0, 700))
+	if (ImGui::SliderInt("Run", &xRun, 0, 700))
 	{
 	}
 	static int yRise = 300.0f;
-	if (ImGui::SliderInt("Rise (cm)", &yRise, 0, 500))
+	if (ImGui::SliderInt("Rise", &yRise, 0, 500))
 	{
 	}
-<<<<<<< Updated upstream
-	static float weight = 12.8f;
-	if (ImGui::SliderFloat("Box Weight", &weight, 1.0f, 50.0f))
-=======
 	static float mass = 12.8f;
-	if (ImGui::SliderFloat("Box Weight (kg)", &mass, 1.0f, 50.0f))
->>>>>>> Stashed changes
+	if (ImGui::SliderFloat("Box Weight", &mass, 1.0f, 50.0f))
 	{
 	}
-	static float friction = 0.0f;
+	static float friction = 0.42f;
 	if (ImGui::SliderFloat("Coefficient of Friction", &friction, 0.0f, 1.0f))
 	{
 	}
@@ -223,7 +205,7 @@ void PlayScene::GUI_Function() const
 		m_pRamp->setRise(yRise);
 		m_pRamp->refresh();
 
-		m_pBall->setWeight(weight);
+		m_pBall->setMass(mass);
 		m_pBall->setf_angle(m_pRamp->getAngle());
 		m_pBall->setFriction(friction);
 		m_pBall->getTransform()->position.x = m_pRamp->getPosition().x;

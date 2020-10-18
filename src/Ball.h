@@ -5,6 +5,8 @@
 #include "Sprite.h"
 #include "Label.h"
 
+class Ramp;
+
 class Ball final : public Sprite
 {
 public:
@@ -46,8 +48,8 @@ public:
 
 	inline float getDegAngle() { return degAngle; }
 
-	inline void setWeight(float w) { weight = w; }
-	inline float getWeight() { return weight; }
+	inline void setMass(float w) { mass = w; }
+	inline float getMass() { return mass; }
 
 	glm::vec2 throwSpeed;
 
@@ -69,14 +71,16 @@ private:
 	float maxdistance;
 	float GravityTime;
 
-	float f_angle = 45.0f, f_result; // to calculate in case of input variables from users
+	float f_angle = 36.87f, f_result; // to calculate in case of input variables from users
 	float f_meter = 485.0f, f_initialVel = 95.0f; // to change total meters and initial velocity(speed)
 	float f_maxdistance;
 	float f_friction;
 
-	float weight, accelTotal, netForce, friction;
+	float mass, accelTotal, netForce, friction, accelGL, netForceGL, velGL;
 
 	bool b_simulationStop = false;
+
+	Ramp* m_Ramp;
 };
 
 #endif /* defined (__PLAYER__) */
