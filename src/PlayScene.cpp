@@ -164,7 +164,7 @@ void PlayScene::GUI_Function() const
 
 	ImGui::Separator();
 
-	static int xPosition = 150;
+	static int xPosition = 10;
 	if (ImGui::SliderInt("Position X", &xPosition, 0, 700))
 	{
 	}

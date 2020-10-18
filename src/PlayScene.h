@@ -40,6 +40,7 @@ private:
 	Label* m_pAccelLabel;
 	Label* m_pNetForceLabel;
 	Label* m_pDistanceLabel;
+	Label* m_pVelocityLabel;
 
 	Button* m_pBackButton;
 	Button* m_pNextButton;

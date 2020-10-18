@@ -4,7 +4,7 @@
 Ramp::Ramp()
 {
 	// original ramp dimensions
-	position = { 150, 470 };
+	position = { 10, 470 };
 	run = 400;
 	rise = 300;
 	refresh();
