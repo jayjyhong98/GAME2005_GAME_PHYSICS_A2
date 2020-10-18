@@ -46,6 +46,7 @@ void PlayScene::update()
 
 	labelText = "BOX: Acceleration(p/s^2 eh??) = " + std::to_string(m_pBall->getAccelTotal());
 	m_pAccelLabel->setText(labelText);
+
 }
 
 void PlayScene::clean()
@@ -175,11 +176,11 @@ void PlayScene::GUI_Function() const
 	if (ImGui::SliderInt("Rise", &yRise, 0, 500))
 	{
 	}
-	static float weight = 12.8f;
-	if (ImGui::SliderFloat("Box Weight", &weight, 1.0f, 50.0f))
+	static float mass = 12.8f;
+	if (ImGui::SliderFloat("Box Weight", &mass, 1.0f, 50.0f))
 	{
 	}
-	static float friction = 0.0f;
+	static float friction = 0.42f;
 	if (ImGui::SliderFloat("Coefficient of Friction", &friction, 0.0f, 1.0f))
 	{
 	}
@@ -191,7 +192,7 @@ void PlayScene::GUI_Function() const
 		m_pRamp->setRise(yRise);
 		m_pRamp->refresh();
 
-		m_pBall->setWeight(weight);
+		m_pBall->setMass(mass);
 		m_pBall->setf_angle(m_pRamp->getAngle());
 		m_pBall->setFriction(friction);
 		m_pBall->getTransform()->position.x = m_pRamp->getPosition().x;

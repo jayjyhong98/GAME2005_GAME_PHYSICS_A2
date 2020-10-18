@@ -1,4 +1,5 @@
 #include "Ball.h"
+#include "Ramp.h"
 #include "Util.h"
 #include "TextureManager.h"
 #include "EventManager.h"
@@ -97,7 +98,7 @@ void Ball::rampMotion()
 	if (pos.y >= 470) // stop when reached ground level
 	{
 		getTransform()->position.y = 470.0f;
-		setState(1);
+		//setState(1);
 	}
 }
 
@@ -111,9 +112,10 @@ void Ball::setState(int x) // Here we can change current input data when new sim
 		float accX, accY;
 		accY = accelTotal * sin(f_angle);
 		accX = accelTotal * cos(f_angle);
+
 		getRigidBody()->acceleration = { accX , accY };
 		getRigidBody()->velocity = { 0.0, 0.0 };
-		netForce = weight * GRAVITY * sin(f_angle) + weight * GRAVITY * cos(f_angle);
+		netForce = mass * GRAVITY * sin(f_angle) - friction * mass * GRAVITY * cos(f_angle);
 	}
 	else if (state == 1) // stop
 	{
