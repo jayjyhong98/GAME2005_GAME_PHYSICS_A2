@@ -1,4 +1,5 @@
 #include "Ramp.h"
+#include "Util.h"
 
 Ramp::Ramp()
 {
@@ -6,9 +7,17 @@ Ramp::Ramp()
 	position = { 150, 470 };
 	run = 400;
 	rise = 300;
-	endPoint = position.x + run;
+	refresh();
+	std::cout << angle * Util::Rad2Deg;
 }
 
 Ramp::~Ramp()
 {
+}
+
+void Ramp::refresh()
+{
+	hyp = sqrt(rise * rise + run * run);
+	endPoint = position.x + run;
+	angle = atan(rise / run);
 }
