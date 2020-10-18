@@ -47,6 +47,11 @@ void PlayScene::update()
 	labelText = "BOX: Acceleration(p/s^2 eh??) = " + std::to_string(m_pBall->getAccelTotal());
 	m_pAccelLabel->setText(labelText);
 
+	labelText = "Distance = " + std::to_string(m_pBall->getTransform()->position.x);
+	m_pDistanceLabel->setText(labelText);
+
+	labelText = "Velocity.x = " + std::to_string(m_pBall->getRigidBody()->velocity.x);
+	m_pVelocityLabel->setText(labelText);
 }
 
 void PlayScene::clean()
@@ -138,6 +143,14 @@ void PlayScene::start()
 	m_pAccelLabel = new Label("Acceleration", "Consolas", 20, red, glm::vec2(400.0f, 100.0f));
 	m_pAccelLabel->setParent(this);
 	addChild(m_pAccelLabel);
+
+	m_pVelocityLabel = new Label("Velocity", "Consolas", 20, red, glm::vec2(300.0f, 130.0f));
+	m_pVelocityLabel->setParent(this);
+	addChild(m_pVelocityLabel);
+
+	m_pDistanceLabel = new Label("Distance", "Consolas", 20, red, glm::vec2(300.0f, 160.0f));
+	m_pDistanceLabel->setParent(this);
+	addChild(m_pDistanceLabel);
 }
 
 void PlayScene::GUI_Function() const
