@@ -75,9 +75,8 @@ private:
 	float f_meter = 485.0f, f_initialVel = 95.0f; // to change total meters and initial velocity(speed)
 	float f_maxdistance;
 	float f_friction;
-	float f_distance;
 
-	float mass, accelTotal, netForce, friction, f_bAngle;
+	float mass, accelTotal, netForce, friction, accelGL, netForceGL, velGL;
 
 	bool b_simulationStop = false;
 

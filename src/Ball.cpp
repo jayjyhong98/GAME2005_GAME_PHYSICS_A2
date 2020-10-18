@@ -95,10 +95,15 @@ void Ball::rampMotion()
 	pos.y += getRigidBody()->velocity.y * deltaTime;
 	getTransform()->position = pos;
 
-	if (pos.y >= 470) // stop when reached ground level
+	if (pos.y >= 470) // try to stop when reached ground level
 	{
 		getTransform()->position.y = 470.0f;
-		//setState(1);
+		setState(1);
+	}
+
+	if (getRigidBody()->velocity.x <= 0.0)  // stop moving. It should be stop at 1316m
+	{
+		setState(2);
 	}
 }
 
@@ -108,6 +113,8 @@ void Ball::setState(int x) // Here we can change current input data when new sim
 	if (state == 0) // in action
 	{
 		accelTotal = GRAVITY * sin(f_angle) - friction * GRAVITY * cos(f_angle);
+		netForce = mass * GRAVITY * sin(f_angle) - friction * mass * GRAVITY * cos(f_angle);
+
 
 		float accX, accY;
 		accY = accelTotal * sin(f_angle);
@@ -115,17 +122,29 @@ void Ball::setState(int x) // Here we can change current input data when new sim
 
 		getRigidBody()->acceleration = { accX , accY };
 		getRigidBody()->velocity = { 0.0, 0.0 };
-		netForce = mass * GRAVITY * sin(f_angle) - friction * mass * GRAVITY * cos(f_angle);
 	}
-	else if (state == 1) // stop
+	else if (state == 1) // when reached ground level
+	{
+		if (getTransform()->position.y == 470.0f)
+		{
+			//accel = -friction * GRAVITY
+			//netForce = mass * -friction * GRAVITY
+
+			accelGL = -friction * GRAVITY;
+			netForceGL = mass * -friction * GRAVITY;
+
+			float accXGL, accYGL;
+
+			accXGL = accelGL;
+			accYGL = 0.0f;
+			getRigidBody()->acceleration = { accXGL , accYGL };
+		}
+	}
+	else if (state == 2) //stop
 	{
 		getRigidBody()->acceleration = { 0.0, 0.0 };
 		getRigidBody()->velocity = { 0.0, 0.0 };
 	}
-
-	getRigidBody()->velocity.x = initialVel * cos(currAngle); // x component of initial power, without wind resistance 'law of inertia' says it won't change :D
-
-	getRigidBody()->velocity.y = -initialVel * sin(currAngle); // '-power' because we want to go 'up', add total of the y-forces
 
 	b_simulationStop = false;
 }
